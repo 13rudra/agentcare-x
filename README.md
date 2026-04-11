@@ -1,13 +1,4 @@
----
-title: AgentCare X
-emoji: 🏥
-colorFrom: blue
-colorTo: purple
-sdk: docker
-pinned: false
----
-
-<div align="center">
+<![CDATA[<div align="center">
 
 # 🏥 AgentCare X
 
@@ -27,8 +18,6 @@ An **OpenEnv-compliant benchmark** for evaluating AI agents on **multi-step reas
 [Grading](#-grading) •
 [API Reference](#-api-reference) •
 [Contributing](#-contributing)
-
-</div>
 
 ---
 
@@ -161,10 +150,10 @@ python inference.py
 Spin up the **OpenEnv REST API** for external agents:
 
 ```bash
-uvicorn server.app:app --host 0.0.0.0 --port 7860 --reload
+uvicorn server.app:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-Open **http://localhost:7860/docs** for the interactive Swagger UI.
+Open **http://localhost:8000/docs** for the interactive Swagger UI.
 
 ---
 
@@ -378,7 +367,7 @@ Results from the **mock (optimal scripted) agent**:
 #### Reset Environment
 
 ```bash
-curl -X POST http://localhost:7860/reset \
+curl -X POST http://localhost:8000/reset \
   -H "Content-Type: application/json" \
   -d '{"task_id": "medium"}'
 ```
@@ -386,7 +375,7 @@ curl -X POST http://localhost:7860/reset \
 #### Execute an Action
 
 ```bash
-curl -X POST http://localhost:7860/step \
+curl -X POST http://localhost:8000/step \
   -H "Content-Type: application/json" \
   -d '{
     "action_type": "respond",
@@ -397,7 +386,7 @@ curl -X POST http://localhost:7860/step \
 #### Call a Tool
 
 ```bash
-curl -X POST http://localhost:7860/step \
+curl -X POST http://localhost:8000/step \
   -H "Content-Type: application/json" \
   -d '{
     "action_type": "call_tool",
@@ -409,13 +398,13 @@ curl -X POST http://localhost:7860/step \
 #### Check State
 
 ```bash
-curl http://localhost:7860/state
+curl http://localhost:8000/state
 ```
 
 #### List Tasks
 
 ```bash
-curl http://localhost:7860/tasks
+curl http://localhost:8000/tasks
 ```
 
 ---
@@ -429,10 +418,10 @@ Build and run the containerized environment:
 docker build -t agentcare-x .
 
 # Run the container
-docker run -p 7860:7860 agentcare-x
+docker run -p 8000:8000 agentcare-x
 
 # Health check
-curl http://localhost:7860/health
+curl http://localhost:8000/health
 ```
 
 ---
@@ -530,3 +519,4 @@ MIT License — built for the [OpenEnv](https://github.com/openenv) ecosystem.
 *AgentCare X — Because AI agents should be smart AND empathetic.*
 
 </div>
+]]>
