@@ -66,14 +66,14 @@ async def reset_env(request: Request):
         obs = env.reset(task_id=task_id)
         return {
             "observation": obs.model_dump(),
-            "reward": 0.0,
+            "reward": 0.01,
             "done": False,
             "info": {}
         }
     except Exception as e:
         return {
             "observation": {"customer_message": "Error loading task", "emotion_level": 0.5},
-            "reward": -1.0,
+            "reward": 0.01,
             "done": True,
             "info": {"error": str(e)}
         }
@@ -110,14 +110,14 @@ async def step_env(request: Request):
         obs, reward, done, info = env.step(action)
         return {
             "observation": obs.model_dump(),
-            "reward": float(reward),
+            "reward": round(max(0.01, min(0.99, float(reward))), 4),
             "done": bool(done),
             "info": info
         }
     except Exception as e:
         return {
             "observation": {"customer_message": "Crash prevented.", "emotion_level": 0.5},
-            "reward": -1.0,
+            "reward": 0.01,
             "done": True,
             "info": {"error": str(e)}
         }

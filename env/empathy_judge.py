@@ -89,7 +89,7 @@ def _call_llm_judge(agent_message: str) -> float:
 
     data = json.loads(raw)
     score = float(data.get("score", 0.5))
-    return max(0.0, min(1.0, score))
+    return max(0.01, min(0.99, score))
 
 
 # ---------------------------------------------------------------------------
@@ -112,4 +112,4 @@ def _keyword_fallback(message: str) -> float:
         return 0.8
     if matches >= 1:
         return 0.5
-    return 0.0
+    return 0.01

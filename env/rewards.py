@@ -1,5 +1,5 @@
 """
-AgentCare X — Dense Reward Calculator
+AgentCare X — Dense Reward Calcswegsgesgulator
 
 Computes per-step reward signals based on agent actions and environment state.
 All signals are deterministic and rule-based.
@@ -101,5 +101,8 @@ def compute_reward(
         breakdown["efficiency_bonus"] = 0.10
 
     total = sum(breakdown.values())
+    # Clamp to (0.01, 0.99) — validator requires scores never exactly 0 or 1
+    total = max(0.01, min(0.99, total))
+
 
     return RewardInfo(total=round(total, 4), breakdown=breakdown)
